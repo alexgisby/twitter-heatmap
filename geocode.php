@@ -39,7 +39,7 @@ function fetch_latlng_for_place($placename)
 
 	$obj = json_decode($response);
 
-	if($obj->status == 'OVER_QUERY_LIMIT')
+	if($obj->status == 'OVER_QUERY_LIMIT' || $obj->status == 'ZERO_RESULTS')
 	{
 		return array();
 	}

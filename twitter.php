@@ -21,8 +21,20 @@ $tmhOAuth = new tmhOAuth(array(
   'oauth_version' => '1.0A',
 ));
 
+$service_lookups = array(
+	'radio1' => '-RT radio1 OR bbcr1 OR to:bbcr1',
+	'radio2' => '-RT radio2 OR bbcr2 OR to:bbcr2',
+	'radio3' => '-RT radio3 OR bbcr3 OR to:bbcr3',
+	'radio4' => '-RT radio4 OR bbcr4 OR to:bbcr4',
+	'fivelive' => '-RT 5live OR 5live OR 5 live',
+);
+
+$query = (isset($_GET['service']) && array_key_exists($_GET['service'], $service_lookups))?
+			$service_lookups[$_GET['service']] : $service_lookups['radio1'];
+
+
 $p = array(
-	'q' => '-RT radio1 OR bbcr1 OR to:bbcr1', // Nuke the RT text
+	'q' => $query,
 	'geocode' => '53.59,-3.4,480km', // Limit to UK tweets
 	'count' => 100
 );
@@ -69,6 +81,5 @@ foreach($results->statuses as $tweet)
 	}
 }
 
-var_dump($result_json_arr);
-
-exit();
+header('Content-Type: application/json');
+echo json_encode($result_json_arr);
