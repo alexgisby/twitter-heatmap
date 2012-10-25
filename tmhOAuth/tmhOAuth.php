@@ -343,6 +343,7 @@ class tmhOAuth {
    * @return void prepared authorization header is stored in a class variables
    */
   private function prepare_auth_header() {
+    // exit('AUTH HEADER BUILT');
     $this->headers = array();
     uksort($this->auth_params, 'strcmp');
     if (!$this->config['as_header']) :
@@ -401,6 +402,8 @@ class tmhOAuth {
 
     $this->create_nonce();
     $this->create_timestamp();
+
+    // var_dump($useauth); exit;
 
     $this->sign($method, $url, $params, $useauth);
     return $this->curlit();
