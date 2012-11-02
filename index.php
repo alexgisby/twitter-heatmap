@@ -3,7 +3,7 @@
 	<head>
 		<meta content-type="utf8">
 		<title>Twitter Heatmap</title>
-		<link rel="stylesheet" href="styles.css" />
+		<link rel="stylesheet" href="/css/styles.css" />
 	</head>
 
 	<body>
@@ -43,9 +43,10 @@
 			</form>
 		</div>
 
+		<?php require_once 'keys.php'; ?>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js" type="text/javascript"></script>
-		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnhKymdX5Z84WqkoCfyDXcUgMPywlOtxw&sensor=false"></script>
-		<script src="heatmap.js"></script>
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<?=GMAPS_TOKEN;?>&sensor=false"></script>
+		<script src="/js/heatmap.js"></script>
 	</body>
 
 </html>

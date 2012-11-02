@@ -17,7 +17,7 @@ $tmhOAuth = new tmhOAuth(array(
   'consumer_secret' => TWITTER_CONSUMER_SECRET,
   'user_token' => TWITTER_USER_KEY,
   'user_secret' => TWITTER_USER_SECRET,
-  'curl_proxy' => 'www-cache.reith.bbc.co.uk:80',
+  'curl_proxy' => REITH_PROXY,
   'oauth_version' => '1.0A',
 ));
 

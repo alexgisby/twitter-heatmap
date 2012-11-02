@@ -29,7 +29,7 @@ function fetch_latlng_for_place($placename)
 		$c = curl_init();
 		curl_setopt_array($c, array(
 			CURLOPT_RETURNTRANSFER => true,
-			CURLOPT_PROXY          => 'www-cache.reith.bbc.co.uk:80',
+			CURLOPT_PROXY          => REITH_PROXY,
 			CURLOPT_URL            => $full_url,
 		));
 
