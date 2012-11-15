@@ -12,11 +12,19 @@ their location on a Google Map.
 - Largely asthetic animation to display Tweet points
 - Fudging of location data to stop multiple pins appearing on top of each other.
 
+## Next Steps
+
+- Stick Tweets and Geocoding into a database
+- Have a cron / worker running in the background polling for Tweets and inserting into DB
+- Query for both :) and :( Tweets, store that and give switching option on frontend.
+- Allow for the query run against the search API to be customised from the frontend (adding hashtags and such)
+- Add Tweet text / Avatars to the frontend.
+
 ## Known issues
 
 - The search API only chucks back 100 Tweets at a time.
 - No real error handling
-- Code is very procedural at the moment, but fast!
+- Code is very procedural at the moment.
 
 ## To install
 

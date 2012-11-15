@@ -39,8 +39,8 @@ $(function(){
 						// Make them appear at random intervals:
 						window.setTimeout(function(){
 
-							// Fudge the lat/lng slightly to make them not appear on top of each
-							// other:
+							// Fudge the lat/lng slightly to make them not appear on top 
+							// of each other:
 
 							latFudge = Math.random() * 0.05;
 							lngFudge = Math.random() * 0.03;
@@ -54,6 +54,8 @@ $(function(){
 								position: latlng,
 								map: map
 							}));
+
+							
 
 						}, i * 300);
 					}
@@ -79,8 +81,6 @@ $(function(){
 		e.preventDefault();
 		updateTweets();
 	}).submit();
-
-	// updateTweets();
 
 	// Set the polling to occur:
 	window.setTimeout(function(){

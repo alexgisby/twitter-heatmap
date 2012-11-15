@@ -70,7 +70,9 @@ foreach($results->statuses as $tweet)
 	{
 		$result_json_arr[] = array(
 			'lat' => $tweet->geo->coordinates[0],
-			'lng' => $tweet->geo->coordinates[1]
+			'lng' => $tweet->geo->coordinates[1],
+			'text' => $tweet->text,
+			'avatar' => $tweet->user->profile_image_url,
 		);
 	}
 	else
