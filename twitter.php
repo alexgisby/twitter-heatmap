@@ -68,11 +68,9 @@ foreach($results->statuses as $tweet)
 	// Simplest case, Tweet has geo info:
 	if($tweet->geo !== null)
 	{
-		$result_json_arr[] = array(
+		$result_json_arr[] = (object)array(
 			'lat' => $tweet->geo->coordinates[0],
 			'lng' => $tweet->geo->coordinates[1],
-			'text' => $tweet->text,
-			'avatar' => $tweet->user->profile_image_url,
 		);
 	}
 	else
@@ -81,6 +79,10 @@ foreach($results->statuses as $tweet)
 		$point = fetch_latlng_for_place($tweet->user->location);
 		$result_json_arr[] = $point;
 	}
+
+	$result_json_arr[$i]->text = (isset($tweet->text))? $tweet->text : '';
+	$result_json_arr[$i]->avatar = (isset($tweet->user->profile_image_url))? $tweet->user->profile_image_url : '';
+	$i ++;
 }
 
 header('Content-Type: application/json');

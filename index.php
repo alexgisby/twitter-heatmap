@@ -45,7 +45,8 @@
 
 		<?php require_once 'keys.php'; ?>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js" type="text/javascript"></script>
-		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<?=GMAPS_TOKEN;?>&sensor=false"></script>
+		<script type="text/javascript" src="http://node1.bbcimg.co.uk/glow/gloader.0.1.6.js"></script>
+		<script type="text/javascript" src="http://cdnedge.bbc.co.uk/mtk/maploader.js"></script>
 		<script src="/js/heatmap.js"></script>
 	</body>
 
