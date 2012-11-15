@@ -50,25 +50,30 @@ $(function(){
 			{
 				jQuery.each(response, function(i, item) {
 
-					// This is horrifically bad. Like, awful. But it seems to be the
-					// only way of avoiding the clustering behaviour of MTK.
-					var layer = new bbc.mtk.OpenLayers.Layer.PinPoints();
-					var latFudge = 0;
-					var lngFudge = 0;
+					// Add in a little UI trickery:
+					window.setTimeout(function(){
+						// This is horrifically bad. Like, awful. But it seems to be the
+						// only way of avoiding the clustering behaviour of MTK.
+						var layer = new bbc.mtk.OpenLayers.Layer.PinPoints();
+						var latFudge = 0;
+						var lngFudge = 0;
 
-					var latitude = item.lat - latFudge;
-					var longitude = item.lng - lngFudge;
+						var latitude = item.lat - latFudge;
+						var longitude = item.lng - lngFudge;
 
-					var balloon = layer.addBalloon(
-						map.getPoint(item.lng - lngFudge, item.lat - latFudge),
-						{
-							color: 'red'
-						}
-					);
+						var balloon = layer.addBalloon(
+							map.getPoint(item.lng - lngFudge, item.lat - latFudge),
+							{
+								color: 'red'
+							}
+						);
 
-					tweets[balloon.id] = item;
-					map.addLayer(layer);
-					layers.push(layer);
+						console.log(balloon.onClick);
+
+						tweets[balloon.id] = item;
+						map.addLayer(layer);
+						layers.push(layer);
+					}, 300 * i);
 
 				});
 			},
@@ -82,17 +87,37 @@ $(function(){
 			{
 				$('#submitline').show();
 				$('#fetch_status').hide();
+
+				countdownInProgress = true;
 			}
 		})
 	}
+
+	var countdownInProgress = false;
+	var countdownLength   = 60;
+	var countdownCurrent  = countdownLength;
+	var $countdown        = $('#refresh_clock .countdown');
+	var countdownInterval = window.setInterval(function(){
+		if(countdownInProgress)
+		{
+			countdownCurrent --;
+			$countdown.text(countdownCurrent);
+
+			if(countdownCurrent == 0) {
+				countdownCurrent = countdownLength;
+				countdownInProgress = false;
+				updateTweets();
+			}
+		}
+	}, 1000);
 
 	$('#serviceform').on('submit', function(e){
 		e.preventDefault();
 		updateTweets();
 	}).submit();
 
-	window.setInterval(function(){
-		updateTweets();
-	}, 60 * 1000);
+	// window.setInterval(function(){
+	// 	updateTweets();
+	// }, 60 * 1000);
 
 });
