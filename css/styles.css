@@ -29,3 +29,18 @@ legend {
 .field {
 	margin-bottom: 10px;
 }
+
+#refresh_clock {
+	background-color: #333;
+	width: 100px;
+	height: 100px;
+	line-height: 100px;
+	text-align: center;
+	color: white;
+	font-family: monospace;
+}
+
+#refresh_clock .countdown {
+	font-size: 4.0em;
+	display: block;
+}

@@ -12,6 +12,11 @@
 
 		</div>
 		<div id="controlarea">
+
+			<div id="refresh_clock">
+				<span class="countdown">59</span>
+			</div>
+
 			<form action="" method="get" id="serviceform">
 				<fieldset>
 					<legend>Choose Station</legend>

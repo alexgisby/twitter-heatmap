@@ -42,7 +42,7 @@ $p = array(
 $cache_filename = 'tweets-cache/' . md5(json_encode($p)) . '.json';
 
 // Check the cache first:
-if(file_exists($cache_filename) && filemtime($cache_filename) >= strtotime('-3 minutes'))
+if(file_exists($cache_filename) && filemtime($cache_filename) >= strtotime('-1 minutes'))
 {
 	$response = file_get_contents($cache_filename);
 }

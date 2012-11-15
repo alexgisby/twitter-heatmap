@@ -27,30 +27,18 @@ $(function(){
 		}
 	});
 
-
-
-
-	// var mapOptions = {
-	// 	center: new google.maps.LatLng(54.59, -3.2),
-	// 	zoom: 6,
-	// 	mapTypeId: google.maps.MapTypeId.ROADMAP
-	// };
-
-	// var map = new google.maps.Map(document.getElementById("maparea"), mapOptions);
-
 	var markers = [];
+	var tweets = {};
+	var layers = [];
 
 	function updateTweets()
 	{
-		// Kill all the markers:
-		// for(var i = 0; i < markers.length; i ++)
-		// {
-		// 	markers[i].setMap(null);
-		// }
-		// markers = [];
-
 		$('#submitline').hide();
 		$('#fetch_status').show();
+
+		for(var i = 0; i < layers.length; i ++) {
+			layers[i].display(false);
+		}
 
 		$.ajax({
 			url: JSON_ENDPOINT,
@@ -65,15 +53,11 @@ $(function(){
 					// This is horrifically bad. Like, awful. But it seems to be the
 					// only way of avoiding the clustering behaviour of MTK.
 					var layer = new bbc.mtk.OpenLayers.Layer.PinPoints();
-					var latFudge = Math.random() * 0.05;
-					var lngFudge = Math.random() * 0.03;
+					var latFudge = 0;
+					var lngFudge = 0;
 
 					var latitude = item.lat - latFudge;
 					var longitude = item.lng - lngFudge;
-
-					// layer.events.register( 'click', this, function() {
-     //                    console.log('CLICK EVEMT');
-     //                });
 
 					var balloon = layer.addBalloon(
 						map.getPoint(item.lng - lngFudge, item.lat - latFudge),
@@ -82,11 +66,9 @@ $(function(){
 						}
 					);
 
-					// balloon.events.register('click', balloon, function(){
-					// 	console.log('Baloon Click');
-					// });
-
+					tweets[balloon.id] = item;
 					map.addLayer(layer);
+					layers.push(layer);
 
 				});
 			},
@@ -94,7 +76,6 @@ $(function(){
 			error: function()
 			{
 				alert('Whoops, bad fetch.');
-
 			},
 
 			complete: function()
@@ -105,15 +86,13 @@ $(function(){
 		})
 	}
 
-	// $('#serviceform').on('submit', function(e){
-	// 	e.preventDefault();
-	// 	updateTweets();
-	// }).submit();
+	$('#serviceform').on('submit', function(e){
+		e.preventDefault();
+		updateTweets();
+	}).submit();
 
-	// // Set the polling to occur:
-	// window.setTimeout(function(){
-	// 	updateTweets();
-	// }, 3 * 60 * 1000);
-
+	window.setInterval(function(){
+		updateTweets();
+	}, 60 * 1000);
 
 });
