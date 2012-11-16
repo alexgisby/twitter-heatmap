@@ -68,8 +68,6 @@ $(function(){
 							}
 						);
 
-						console.log(balloon.onClick);
-
 						tweets[balloon.id] = item;
 						map.addLayer(layer);
 						layers.push(layer);
@@ -115,9 +113,5 @@ $(function(){
 		e.preventDefault();
 		updateTweets();
 	}).submit();
-
-	// window.setInterval(function(){
-	// 	updateTweets();
-	// }, 60 * 1000);
 
 });
